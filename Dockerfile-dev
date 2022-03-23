@@ -1,0 +1,15 @@
+FROM golang:1.17.1
+
+RUN go install github.com/rafaelsq/wtc@latest
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.45.0
+
+WORKDIR /app
+
+COPY app/ app/
+
+COPY go.mod .
+COPY .wtc.yaml .
+
+EXPOSE 8083
+
+CMD [ "wtc" ]
