@@ -8,8 +8,8 @@ import (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, you've requested samu: %s\n", r.URL.Path)
+		fmt.Fprintf(w, "Hello, you've requested the path: %s\n", r.URL.Path)
 	})
 
-	_ = http.ListenAndServe(os.Getenv("APP_PORT"), nil)
+	_ = http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }

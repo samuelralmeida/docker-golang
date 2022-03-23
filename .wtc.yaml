@@ -12,8 +12,8 @@ rules:
     ignore: (_test\.go)
     command: go run app/cmd/main.go
     env:
-      - name: APP_PORT
-        value: :8083
+      - type: file
+        name: ./.env
 
   - name: test
     match: _test\.go$
