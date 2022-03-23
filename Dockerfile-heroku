@@ -1,0 +1,12 @@
+FROM golang:1.17.1 AS builder
+WORKDIR /build
+COPY . .
+RUN go build -o main-server app/cmd/main.go
+
+FROM heroku/heroku:20
+COPY --from=builder /build/main-server /app/main-server
+ENV HOME /app
+WORKDIR /app
+RUN useradd -m heroku
+USER heroku
+CMD /app/main-server
